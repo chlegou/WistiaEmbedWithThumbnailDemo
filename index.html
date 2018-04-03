@@ -34,15 +34,19 @@ Getting Thumbnail, was from this tuto:  http://jsfiddle.net/Lukas238/a01jvk2e/
             var thumb = data.thumbnail_url.split('?')[0];
             $('#wistia_'+wistiaId)
                 .removeClass('loading')
-                .append( $('<img>', {id: 'wistia_preview', src: thumb +"?"+ thumb_args, class: 'img-fluid', alt:""}));  
+                .append( $('<img>', {id: 'wistia_preview', src: thumb +"?"+ thumb_args, class: 'img-fluid', alt:"", onmouseover: "createWistiaVideoById('"+wistiaId+"')"}));  
 			$('#wistia_preview').on('click', function(){
-				wistiaEmbed = Wistia.embed( wistiaId , {
-				  autoPlay: true,
-				  controlsVisibleOnLoad: false
-				});
+				createWistiaVideoById(wistiaId);
 			});
 		});
 	});
+	
+	function createWistiaVideoById(wistiaId){
+		wistiaEmbed = Wistia.embed( wistiaId , {
+				  autoPlay: false,
+				  controlsVisibleOnLoad: false
+				});
+	}
     
 </script>
 </body>
