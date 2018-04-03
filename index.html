@@ -1,0 +1,49 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+
+<div>
+Video Demo Id: u1p1pze1an
+</div>
+<div class="embed-responsive embed-responsive-16by9">
+  <div id="wistia_u1p1pze1an" data-wistia-id="u1p1pze1an" class="container full-width embed-responsive-item wistia_embed"></div>
+
+  </div>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="http://fast.wistia.com/assets/external/E-v1.js"></script>
+<script>
+/*
+Getting Thumbnail, was from this tuto:  http://jsfiddle.net/Lukas238/a01jvk2e/
+
+*/
+
+
+	$(document).ready(function() {
+		var baseUrl = "http://fast.wistia.com/oembed/?url=";
+		var accountUrl = encodeURIComponent("http://home.wistia.com/medias/");
+		var wistiaId = $('.wistia_embed').data('wistia-id');
+		var thumb_args = 'image_play_button=true&image_play_button_color=7b7968e0';
+		
+		$.getJSON( baseUrl + accountUrl + wistiaId + "&format=json&callback=?", function(data){
+            var thumb = data.thumbnail_url.split('?')[0];
+            $('#wistia_'+wistiaId)
+                .removeClass('loading')
+                .append( $('<img>', {id: 'wistia_preview', src: thumb +"?"+ thumb_args, class: 'img-fluid', alt:""}));  
+			$('#wistia_preview').on('click', function(){
+				wistiaEmbed = Wistia.embed( wistiaId , {
+				  autoPlay: true,
+				  controlsVisibleOnLoad: false
+				});
+			});
+		});
+	});
+    
+</script>
+</body>
+</html>
